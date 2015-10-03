@@ -1,7 +1,5 @@
 # RabbitMQ Things with Node.js
 
-## Basic Commands
-
 #### Install
 ```
 echo "deb http://www.rabbitmq.com/debian/ testing main" | sudo tee -a /etc/apt/sources.list.d/rabbitmq.list
