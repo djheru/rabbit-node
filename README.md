@@ -1,6 +1,6 @@
 # RabbitMQ Things with Node.js
 
-#### Install
+### Install
 ```
 echo "deb http://www.rabbitmq.com/debian/ testing main" | sudo tee -a /etc/apt/sources.list.d/rabbitmq.list
 curl -L -o ~/rabbitmq-signing-key-public.asc http://www.rabbitmq.com/rabbitmq-signing-key-public.asc
@@ -8,7 +8,7 @@ sudo apt-key add ~/rabbitmq-signing-key-public.asc
 sudo apt-get update && sudo apt-get install -y --force-yes rabbitmq-server erlang-nox
 ```
 
-#### Basic Commands
+### Basic Commands
 
 ##### Start Server
 
@@ -36,7 +36,7 @@ sudo apt-get update && sudo apt-get install -y --force-yes rabbitmq-server erlan
 
 `rabbitmqctl list_channels`
 
-#### Enable Web UI
+### Enable Web UI
 
 *execute from installation sbin (e.g. /usr/sbnin)*
 
