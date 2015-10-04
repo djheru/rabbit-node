@@ -1,8 +1,10 @@
 module.exports = function OrderService(order) {
   this.Order = order;
   this.Checkout = function() {
-    console.log("INFO, Placed order " + this.Order.OrderId);
-    this.ProcessOrder();
+    console.log("INFO, Placed order " + this.Order.orderId);
+
+    //Instead, let's send a message!
+    //this.ProcessOrder();
   };
   this.ProcessOrder = function() {
     this.PaymentGateway();
