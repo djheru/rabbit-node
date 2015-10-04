@@ -8,7 +8,7 @@ var orderId = 0;
 
 connection.on('ready', function () {
   var exchange = connection.exchange('shop.exchange', {type: 'direct'});
-  var queue = connection.queue('shop.queue');
+  var queue = connection.queue('shop.queue', {durable: true});
 
   queue.on('queueDeclareOk', function (args) {
     console.log('queueDeclareOk');
@@ -24,7 +24,7 @@ connection.on('ready', function () {
         var orderService = new OrderService(order);
 
         orderService.Checkout();
-        exchange.publish('order.key', order);
+        exchange.publish('order.key', order, {deliveryMode: 2});
       });
     });
   });

@@ -5,7 +5,7 @@ var OrderService = require('./orderService'),
 
 connection.on('ready', function () {
   var exchange = connection.exchange('shop.exchange', {type: 'direct'}),
-    queue = connection.queue('shop.queue');
+    queue = connection.queue('shop.queue', {durable: true});
   queue.on('queueDeclareOk', function (args) {
     console.log('queueDeclareOk');
 
