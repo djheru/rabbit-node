@@ -24,6 +24,14 @@ sudo apt-get update && sudo apt-get install -y --force-yes rabbitmq-server erlan
 
 `rabbitmqctl status`
 
+##### Reset RabbitMQ
+*After Changes to Properties of Exchanges and Queues*
+```
+rabbitmqctl stop_app
+rabbitmqctl reset
+rabbitmqctl start_app
+```
+
 ##### Other Commands
 
 `rabbitmqctl list_connections`
