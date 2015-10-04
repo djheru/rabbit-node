@@ -38,11 +38,9 @@ sudo apt-get update && sudo apt-get install -y --force-yes rabbitmq-server erlan
 
 ### Enable Web UI
 
-*execute from installation sbin (e.g. /usr/sbnin)*
-
-*access at [http://localhost:15672](http://localhost:15672)*
-
-*default credentials are guest:guest*
+- *execute from installation sbin (e.g. /usr/sbnin)*
+- *access at [http://localhost:15672](http://localhost:15672)*
+- *default credentials are guest:guest*
 
 `rabbitmq-plugins enable rabbitmq_management`
 
