@@ -5,7 +5,10 @@ var OrderService = require('./orderService'),
 
 connection.on('ready', function () {
   var exchange = connection.exchange('shop.exchange', {type: 'direct'}),
-    queue = connection.queue('shop.queue', {durable: true});
+  //durable: true sets the message to persist if there is no consumer
+  //autoDelete: true makes rabbit waits for ack from consumer before deleting
+    queue = connection.queue('shop.queue', {durable: true, autoDelete: false});
+
   queue.on('queueDeclareOk', function (args) {
     console.log('queueDeclareOk');
 
@@ -13,10 +16,12 @@ connection.on('ready', function () {
     queue.on('queueBindOk', function () {
       console.log('queueBindOk');
 
-      queue.subscribe(function (message) {
-        console.log('subscribe');
+      //ack: true sends an acknowledgement when the message is received
+      queue.subscribe({ack: true}, function (message, headers, deliveryInfo, messageObject) {
+        console.log('subscribe', message, headers, deliveryInfo, messageObject);
         var orderService = new OrderService(message.data);
         orderService.ProcessOrder();
+        queue.shift();
       });
 
     });

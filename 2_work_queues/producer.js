@@ -8,7 +8,9 @@ var orderId = 0;
 
 connection.on('ready', function () {
   var exchange = connection.exchange('shop.exchange', {type: 'direct'});
-  var queue = connection.queue('shop.queue', {durable: true});
+  //durable: true sets the message to persist if there is no consumer
+  //autoDelete: true makes rabbit waits for ack from consumer before deleting
+  var queue = connection.queue('shop.queue', {durable: true, autoDelete: false});
 
   queue.on('queueDeclareOk', function (args) {
     console.log('queueDeclareOk');
@@ -25,7 +27,7 @@ connection.on('ready', function () {
 
         orderService.Checkout();
         exchange.publish('order.key', order, {deliveryMode: 2});
-      });
+      }, 100);
     });
   });
 });
