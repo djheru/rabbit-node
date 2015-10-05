@@ -19,6 +19,14 @@ connection.on('ready', function () {
     queue.on('queueBindOk', function () {
       console.log('queueBindOk');
 
+      /*//send an order
+      console.log('new order for checkout');
+      var order = new Order(++orderId);
+      var orderService = new OrderService(order);
+
+      orderService.Checkout();
+      exchange.publish('order.key', order, {deliveryMode: 2});*/
+
       //repeatedly send some orders
       setInterval(function () {
         console.log('new order for checkout');
@@ -27,7 +35,7 @@ connection.on('ready', function () {
 
         orderService.Checkout();
         exchange.publish('order.key', order, {deliveryMode: 2});
-      }, 100);
+      }, 1000);
     });
   });
 });

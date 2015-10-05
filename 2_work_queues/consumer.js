@@ -18,7 +18,7 @@ connection.on('ready', function () {
 
       //ack: true sends an acknowledgement when the message is received
       queue.subscribe({ack: true}, function (message, headers, deliveryInfo, messageObject) {
-        console.log('subscribe', message, headers, deliveryInfo, messageObject);
+        console.log('subscribe', message);//, headers, deliveryInfo, messageObject);//
         var orderService = new OrderService(message.data);
         orderService.ProcessOrder();
         queue.shift();
