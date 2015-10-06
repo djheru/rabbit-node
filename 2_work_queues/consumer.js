@@ -21,7 +21,7 @@ connection.on('ready', function () {
       queue.subscribe({ack: true}, function (message, headers, deliveryInfo, messageObject) {
         console.log('subscribe', message);//, headers, deliveryInfo, messageObject);//
         var orderService = new OrderService(message.data);
-        orderService.ProcessOrder();
+        orderService.processOrder();
         queue.shift();
         console.log('Remove order from queue.');
       });
