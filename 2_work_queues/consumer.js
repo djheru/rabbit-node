@@ -4,8 +4,10 @@ var OrderService = require('./orderService'),
   connection = amqp.createConnection();
 
 connection.on('ready', function () {
+
   //Add confirm: true to the options for Producer Confirms
   var exchange = connection.exchange('shop.exchange', {type: 'direct', confirm: true}),
+
   //durable: true sets the message to persist if there is no consumer
   //autoDelete: true makes rabbit waits for ack from consumer before deleting
     queue = connection.queue('shop.queue', {durable: true, autoDelete: false});
@@ -21,7 +23,7 @@ connection.on('ready', function () {
       queue.subscribe({ack: true}, function (message, headers, deliveryInfo, messageObject) {
         console.log('subscribe', message);//, headers, deliveryInfo, messageObject);//
         var orderService = new OrderService(message.data);
-        orderService.processOrder();
+        orderService.ProcessOrder();
         queue.shift();
         console.log('Remove order from queue.');
       });

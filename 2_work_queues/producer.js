@@ -34,7 +34,7 @@ connection.on('ready', function () {
         var order = new Order(++orderId);
         var orderService = new OrderService(order);
 
-        orderService.Checkout();
+        orderService.ProcessOrder();
         //For publisher confirms, when publishing, give it an error callback
         exchange.publish('order.key', order, {deliveryMode: 2}, function (err) {
           if (err) {
