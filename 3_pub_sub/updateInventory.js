@@ -11,7 +11,7 @@ connection.on('ready', function () {
     queue.bind('shop.fanout.exchange', '');
     queue.on('queueBindOk', function () {
       queue.subscribe(function (message) {
-        var orderService = new OrderService(message.data);
+        var orderService = new OrderService(message);
         orderService.updateInventory();
       });
     });

@@ -8,14 +8,18 @@ connection.on('ready', function () {
     queue = connection.queue('shop.recommendations.queue');
 
   queue.on('queueDeclareOk', function (args) {
+
     queue.bind('shop.fanout.exchange', '');
     queue.on('queueBindOk', function () {
-      console.log('queue bound ok?');
+
       queue.subscribe(function (message) {
-        var orderService = new OrderService(message.data);
-        console.log('update recomme')
+
+        var orderService = new OrderService(message);
         orderService.updateRecommendations();
+
       });
+
     });
+
   });
 });

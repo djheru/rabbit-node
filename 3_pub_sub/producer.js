@@ -14,11 +14,9 @@ connection.on('ready', function () {
   var queue = connection.queue('shop.queue', {durable: true, autoDelete: false});
 
   queue.on('queueDeclareOk', function (args) {
-    console.log('queueDeclareOk');
 
     queue.bind('shop.exchange', 'order.key');
     queue.on('queueBindOk', function () {
-      console.log('queueBindOk');
 
       /*//send an order
        console.log('new order for checkout');
@@ -30,7 +28,6 @@ connection.on('ready', function () {
 
       //repeatedly send some orders
       setInterval(function () {
-        console.log('new order for checkout');
         var order = new Order(++orderId);
         var orderService = new OrderService(order);
 

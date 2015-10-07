@@ -1,11 +1,11 @@
 var OrderService = function OrderService(order) {
 
-  console.log('Order: order');
-
   this.order = order;
 
+  console.log('Order: ', this.order);
+
   this.checkout = function () {
-    console.log('checkout OrderId: ' + this.order.orderId);
+    console.log('checkout Order: ' + this.order);
   };
 
   this.processOrder = function () {
