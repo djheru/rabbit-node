@@ -21,6 +21,9 @@ amqp.connect('amqp://localhost', function (err, conn) {
 
     //declare the queue in case it not exist
     ch.assertQueue(q, {durable: true});
+    //Prefetch allows the broker to distribute messages based on how busy they are
+    //It won't dispatch the message till a worker has processed and acknowleged the previous one
+    //Sending it to the next free worker
     console.log(' [*] Waiting for messages in %s. To exit, press CTRL+C', q);
     ch.consume(q, function (msg) {
       //mock a time-consuming task by appending '.'s
