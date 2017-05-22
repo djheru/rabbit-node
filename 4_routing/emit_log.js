@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-var amqp = require('amqplib/callback_api');
+const amqp = require('amqplib/callback_api');
 
 amqp.connect('amqp://localhost', function (err, conn) {
 
@@ -17,12 +17,12 @@ amqp.connect('amqp://localhost', function (err, conn) {
       process.exit(1);
     }
 
-    var ex = 'direct_logs';
+    const ex = 'direct_logs';
 
     console.log(process.argv);
-    var args = process.argv.slice(2);
-    var msg = args.slice(1).join(' ') || 'Hello World';
-    var severity = (args.length > 0) ? args[0] : 'info';
+    const args = process.argv.slice(2);
+    const msg = args.slice(1).join(' ') || 'Hello World';
+    const severity = (args.length > 0) ? args[0] : 'info';
 
     ch.assertExchange(ex, 'direct', {durable: false});
     ch.publish(ex, severity, new Buffer(msg));

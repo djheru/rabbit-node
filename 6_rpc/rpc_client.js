@@ -1,8 +1,8 @@
 #!/usr/bin/env node
+const uuid = require('node-uuid')
+const amqp = require('amqplib/callback_api');
 
-var amqp = require('amqplib/callback_api');
-
-var args = process.argv.slice(2);
+const args = process.argv.slice(2);
 
 if (args.length == 0) {
   console.log("Usage: rpc_client.js num");
@@ -12,7 +12,7 @@ if (args.length == 0) {
 amqp.connect('amqp://localhost', function(err, conn) {
   conn.createChannel(function(err, ch) {
     ch.assertQueue('', {exclusive: true}, function(err, q) {
-      var corr = generateUuid();
+      var corr = uuid.v4();
       var num = parseInt(args[0]);
 
       console.log(' [x] Requesting fib(%d)', num);
@@ -30,9 +30,3 @@ amqp.connect('amqp://localhost', function(err, conn) {
     });
   });
 });
-
-function generateUuid() {
-  return Math.random().toString() +
-    Math.random().toString() +
-    Math.random().toString();
-}
