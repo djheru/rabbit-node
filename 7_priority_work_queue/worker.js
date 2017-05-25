@@ -10,7 +10,13 @@ amqp.connect('amqp://localhost')
 			.then((ch) => {
 				const processMessage = (message) => {
 					const item = JSON.parse(message.content.toString());
-					console.log(' [X] Received msg: %s with priority %d', message.content.toString(), item.priority);
+
+					console.log(
+						' [X] Received msg: %s with priority %d',
+						JSON.stringify(item, null, 2),
+						item.priority
+					);
+
 					const processTime = Math.floor(Math.random() * 3) * 1000;
 					// console.log(' [X] takes %d ms to process', processTime);
 					setTimeout(() => {

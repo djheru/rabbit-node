@@ -3,7 +3,9 @@
 const amqp = require('amqplib');
 const workItemFactory = require('./work_items');
 
-const workItems = workItemFactory(100);
+const args = process.argv.slice(2);
+const numItems = (args.length > 0) ? parseInt(args[0], 10) : 100;
+const workItems = workItemFactory(numItems);
 
 amqp.connect('amqp://localhost')
 	.then((conn) => {
